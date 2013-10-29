@@ -10,6 +10,13 @@ At first, obsolete comments were easy to come by. As I kept flagging them, howev
 This is what I came up with.
 
 SECommentFlagger
-================
+----------------
 
 This is an OS X app for finding comments on Stack Exchange to flag - awesome for driving those ♦ mods crazy. It allows you to specify a user ID on a site. The app will then fetch all of that user's comments on the site. After this, the app allows you to search for comments.
+
+License
+--------
+
+This is licensed under the [GPL v2](http://choosealicense.com/licenses/gpl-v2). 
+
+Have fun!
