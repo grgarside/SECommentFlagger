@@ -17,6 +17,6 @@ This is an OS X app for finding comments on Stack Exchange to flag - awesome for
 License
 --------
 
-This is licensed under the [GPL v2](http://choosealicense.com/licenses/gpl-v2). 
+This is licensed under [GPL v2](http://choosealicense.com/licenses/gpl-v2). 
 
 Have fun!
