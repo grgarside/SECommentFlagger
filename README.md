@@ -19,7 +19,11 @@ Instructions
 
  - Build the app (Xcode to the rescue!) 
  - Input a site API key (stackoverflow, space, security, etc.)
- - specify a `max` and a `start`. The `max` tells the app how many comments to get, and the `start` tells it which page to start at.
+ - Specify a `max` and a `start`. The `max` tells the app how many comments to get, and the `start` tells it which page to start at.
+ - Press the `Fetch Comments` button.
+ - Wait until the app fetches the comments.
+ - The search box will now work - I find searches like `edit`, `added`, `fix` to turn up obsolete comments.
+ - Clicking on a row will bring up the comment in your default browser.
 
 License
 --------
