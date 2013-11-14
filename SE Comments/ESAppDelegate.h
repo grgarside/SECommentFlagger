@@ -10,6 +10,9 @@
 
 @interface ESAppDelegate : NSObject <NSApplicationDelegate, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate>
 
+@property (weak) IBOutlet NSTextField *maxField;
+@property (weak) IBOutlet NSTextField *startField;
+
 @property (assign) IBOutlet NSWindow *window;
 @property (weak) IBOutlet NSTextField *userIDField;
 @property (weak) IBOutlet NSTextField *siteAPIKeyField;

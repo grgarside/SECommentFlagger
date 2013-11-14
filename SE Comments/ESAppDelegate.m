@@ -20,7 +20,9 @@
 {
     self.isSearching = NO;
     
-    __block NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.stackexchange.com/2.1/users/%@/comments?pagesize=0&order=desc&sort=creation&site=%@&filter=!9f8L7EC3I", self.userIDField.stringValue, self.siteAPIKeyField.stringValue]];
+    if (self.siteAPIKeyField.stringValue.length == 0 && self.userIDField.stringValue.length == 0) return;
+    
+    __block NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.stackexchange.com/2.1/comments?pagesize=0&order=desc&sort=creation&site=%@&filter=!9f8L7EC3I&key=rtC1I9wXXeYe8mTZBYWmGQ((", /*self.userIDField.stringValue,*/ self.siteAPIKeyField.stringValue]];
     dispatch_queue_t Q = dispatch_queue_create("queue", NULL);
     dispatch_async(Q, ^{
         NSData *data = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:url] returningResponse:nil error:nil];
@@ -31,12 +33,13 @@
         NSMutableArray *array = @[].mutableCopy;
         self.comments = @[];
         BOOL hasMore = YES;
-        int page = 0;
+        int page = self.startField.intValue;
         int commentsGotten = 0;
-        while (hasMore) {
+        int max = self.maxField.intValue;
+        while (hasMore && commentsGotten <= max) {
             page++;
             
-            url = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.stackexchange.com/2.1/users/%@/comments?pagesize=100&order=desc&sort=creation&site=%@&filter=!)sVg3JxWFJByGqu4AeY6&page=%i", self.userIDField.stringValue, self.siteAPIKeyField.stringValue, page]];
+            url = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.stackexchange.com/2.1/comments?pagesize=100&order=desc&sort=creation&site=%@&filter=!)sVg3JxWFASDBvWs-1vb&page=%i&key=rtC1I9wXXeYe8mTZBYWmGQ((", /*self.userIDField.stringValue,*/ self.siteAPIKeyField.stringValue, page]];
             data = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:url] returningResponse:nil error:nil];
             dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
             [array addObjectsFromArray:dict[@"items"]];
@@ -61,6 +64,10 @@
     else if ([tableColumn.identifier isEqualToString:@"comment"])
     {
         cell.textField.stringValue = (self.isSearching) ? [self.searchResults[row][@"body"] stringByConvertingHTMLToPlainText] : [self.comments[row][@"body"] stringByConvertingHTMLToPlainText];
+    }
+    else if ([tableColumn.identifier isEqualToString:@"id"])
+    {
+        cell.textField.intValue = [(self.isSearching) ? self.searchResults[row][@"comment_id"] : self.comments[row][@"comment_id"] intValue];
     }
     return cell;
 }
