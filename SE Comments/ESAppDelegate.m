@@ -96,4 +96,7 @@
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
     
 }
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)app {
+    return YES;
+}
 @end
